@@ -10,6 +10,10 @@ app.config(['$routeProvider',
                 templateUrl: 'partials/seq_input.html',
                 controller: 'MainCtrl'
             }).
+            when('/stage', {
+                templateUrl: 'partials/stage.html',
+                controller: 'StageCtrl'
+            }).
             otherwise({
                 redirectTo: '/seq_input'
             });

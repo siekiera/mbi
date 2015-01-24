@@ -1,0 +1,22 @@
+<div>
+    <p>Etap {{stageId}}</p>
+    <div ng-repeat="uiMatrix in uiMatricesOnLeft">
+        <p>{{uiMatrix.description}}</p>
+        <table>
+            <tr ng-repeat="row in uiMatrix.matrix track by $index">
+                <td ng-repeat="cell in row track by $index">{{ cell }}</td>
+            </tr>
+        </table>
+    </div>
+    <hr/>
+    <div ng-repeat="uiMatrix in uiMatricesOnRight">
+        <p>{{uiMatrix.description}}</p>
+        <table>
+            <tr ng-repeat="row in uiMatrix.matrix track by $index">
+                <td ng-repeat="cell in row track by $index">{{ cell }}</td>
+            </tr>
+        </table>
+    </div>
+    <button ng-click="nextStage()">Następny etap</button>
+    <button ng-click="prevStage()">Poprzedni etap</button>
+</div>
