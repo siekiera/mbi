@@ -1,4 +1,8 @@
 <div>
+    <p>Sekwencje: </p>
+    <ul>
+        <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
+    </ul>
     <p>Etap {{stageId}}</p>
     <div ng-repeat="uiMatrix in uiMatricesOnLeft">
         <p>{{uiMatrix.description}}</p>
