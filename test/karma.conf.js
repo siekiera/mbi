@@ -7,6 +7,8 @@ module.exports = function(config){
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/sprintf/src/sprintf.js',
+      'app/bower_components/sprintf/src/angular-sprintf.js',
       'app/js/**/*.js',
       'test/unit/**/*.js'
     ],
