@@ -19,6 +19,7 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
     $scope.content = [];
     $scope.outputMatrix = null;
     $scope.matrices = {
+        // FIXME:: Mock - should be received from the algorithm
         substitution_matrix: [[1, 2, 2], [4, 5, 6], [7,8 , 9]],
         q_pair_prob_est_matrix: [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6], [0.7, 0.8, 0.9]],
         p_symbol_pair_matrix: [[0.1, 0.2, 0.3]],
@@ -53,30 +54,29 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
     };
 
     $scope.uiMatricesOnLeft = [];
-    $scope.uiMatricesOnRight = [];
+    $scope.uiMatrixOnRight = null;
 
     $scope.loadStage = function() {
         switch ($scope.stageId) {
             case 1:
-                //FIXME
                 $scope.uiMatricesOnLeft = [];
-                $scope.uiMatricesOnRight = [$scope.uiMatrices.substitution];
+                $scope.uiMatrixOnRight = $scope.uiMatrices.substitution;
                 break;
             case 2:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.substitution];
-                $scope.uiMatricesOnRight = [$scope.uiMatrices.q_pair_prob_est];
+                $scope.uiMatrixOnRight = $scope.uiMatrices.q_pair_prob_est;
                 break;
             case 3:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.substitution, $scope.uiMatrices.q_pair_prob_est];
-                $scope.uiMatricesOnRight = [$scope.uiMatrices.p_symbol_pair_matrix];
+                $scope.uiMatrixOnRight = $scope.uiMatrices.p_symbol_pair_matrix;
                 break;
             case 4:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.q_pair_prob_est, $scope.uiMatrices.p_symbol_pair_matrix];
-                $scope.uiMatricesOnRight = [$scope.uiMatrices.e_matrix];
+                $scope.uiMatrixOnRight = $scope.uiMatrices.e_matrix;
                 break;
             case 5:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.e_matrix];
-                $scope.uiMatricesOnRight = [$scope.uiMatrices.blosum_matrix];
+                $scope.uiMatrixOnRight = $scope.uiMatrices.blosum_matrix;
                 break;
         }
     };

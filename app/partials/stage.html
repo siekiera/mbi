@@ -13,10 +13,10 @@
         </table>
     </div>
     <hr/>
-    <div ng-repeat="uiMatrix in uiMatricesOnRight">
-        <p>{{uiMatrix.description}}</p>
+    <div>
+        <p>{{uiMatrixOnRight.description}}</p>
         <table>
-            <tr ng-repeat="row in uiMatrix.matrix track by $index">
+            <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index">
                 <td ng-repeat="cell in row track by $index">{{ cell }}</td>
             </tr>
         </table>
