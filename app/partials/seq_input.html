@@ -1,0 +1,9 @@
+<div>
+    <p>Internal {{ text }}</p>
+
+    <input ng-model="inputSequence"/>
+    <button name="Dodaj" ng-click="addSequence()">Dodaj</button>
+    <ul>
+        <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
+    </ul>
+</div>
