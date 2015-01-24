@@ -89,12 +89,14 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
         if ($scope.stageId < 5) {
             $scope.stageId++;
             $scope.loadStage();
+            $scope.currentStep = 0;
         }
     };
     $scope.prevStage = function() {
         if ($scope.stageId > 1) {
             $scope.stageId--;
             $scope.loadStage();
+            $scope.currentStep = $scope.stepCount;
         }
     };
     $scope.nextStep = function() {
