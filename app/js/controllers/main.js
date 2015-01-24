@@ -17,7 +17,7 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
     $scope.stageId = 1;
     $scope.sequences = $scope.$parent.sequences;
     $scope.content = [];
-    $scope.outputMatrix = null;
+    $scope.currentStep = 0;
     $scope.matrices = {
         // FIXME:: Mock - should be received from the algorithm
         substitution_matrix: [[1, 2, 2], [4, 5, 6], [7,8 , 9]],
@@ -55,6 +55,8 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
 
     $scope.uiMatricesOnLeft = [];
     $scope.uiMatrixOnRight = null;
+    $scope.uiMatrixOnRightWidth = 0;
+    $scope.stepCount = 0;
 
     $scope.loadStage = function() {
         switch ($scope.stageId) {
@@ -79,6 +81,8 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
                 $scope.uiMatrixOnRight = $scope.uiMatrices.blosum_matrix;
                 break;
         }
+        $scope.uiMatrixOnRightWidth = $scope.uiMatrixOnRight.matrix.length > 0 ? $scope.uiMatrixOnRight.matrix[0].length : 0;
+        $scope.stepCount = $scope.uiMatrixOnRight.matrix.length * $scope.uiMatrixOnRightWidth;
     };
 
     $scope.nextStage = function() {
@@ -93,6 +97,30 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
             $scope.loadStage();
         }
     };
+    $scope.nextStep = function() {
+        if ($scope.currentStep < $scope.stepCount ) {
+            $scope.currentStep++;
+        }
+    };
+    $scope.prevStep = function() {
+        if ($scope.currentStep > 0 ) {
+            $scope.currentStep--;
+        }
+    };
+
+    $scope.rowsInCurrentStep = function () {
+        return Math.ceil($scope.currentStep / $scope.uiMatrixOnRightWidth);
+    };
+    $scope.colsInLastRow = function() {
+        var cols =  $scope.currentStep % $scope.uiMatrixOnRightWidth;
+        if (cols == 0) {
+            cols = $scope.uiMatrixOnRightWidth;
+        }
+        return cols;
+    };
+
+
+    // initialization
     $scope.loadStage();
 
 }]);
