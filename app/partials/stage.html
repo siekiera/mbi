@@ -8,7 +8,14 @@
     <div ng-repeat="uiMatrix in uiMatricesOnLeft">
         <p>{{uiMatrix.description}}</p>
         <table border="1">
+            <tr>
+                <td></td>
+                <td ng-repeat="name in colsNames">
+                    {{ name }}
+                </td>
+            </tr>
             <tr ng-repeat="row in uiMatrix.matrix track by $index">
+                <td>{{getRowsNames(uiMatrix)[$index]}}</td>
                 <td ng-repeat="cell in row track by $index">{{ cell }}</td>
             </tr>
         </table>
@@ -17,22 +24,31 @@
     <div>
         <p>{{uiMatrixOnRight.description}}</p>
         <table border="1">
+            <tr>
+                <td></td>
+                <td ng-repeat="name in colsNames">
+                    {{ name }}
+                </td>
+            </tr>
             <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index" ng-show="$index + 1 < rowsInCurrentStep()">
-                    <td ng-repeat="cell in row track by $index">
-                        {{ cell }}
-                    </td>
+                <td>{{rightRowsNames[$index]}}</td>
+                <td ng-repeat="cell in row track by $index">
+                    {{ cell }}
+                </td>
             </tr>
             <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index" ng-show="$index + 1 == rowsInCurrentStep()">
-                    <td class="rmatrix-cell-standard" ng-repeat="cell in row track by $index" ng-show="$index + 1 < colsInLastRow()">
-                        {{ cell }}
-                    </td>
-                    <td class="rmatrix-cell-current" ng-repeat="cell in row track by $index" ng-show="$index + 1 == colsInLastRow()">
-                        {{ cell }}
-                    </td>
-                    <td ng-repeat="cell in row track by $index" ng-show="$index + 1 > colsInLastRow()">
+                <td>{{rightRowsNames[$index]}}</td>
+                <td class="rmatrix-cell-standard" ng-repeat="cell in row track by $index" ng-show="$index + 1 < colsInLastRow()">
+                    {{ cell }}
+                </td>
+                <td class="rmatrix-cell-current" ng-repeat="cell in row track by $index" ng-show="$index + 1 == colsInLastRow()">
+                    {{ cell }}
+                </td>
+                <td ng-repeat="cell in row track by $index" ng-show="$index + 1 > colsInLastRow()">
 
             </tr>
             <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index" ng-show="$index + 1 > rowsInCurrentStep()">
+                <td>{{rightRowsNames[$index]}}</td>
                 <td ng-repeat="cell in row track by $index">
                 </td>
             </tr>
