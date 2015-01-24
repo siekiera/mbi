@@ -1,5 +1,12 @@
-var app = angular.module('blosumCalculatorApp', []);
+'use strict';
 
-app.controller('MainCtrl', function ($scope) {
+var controllers = angular.module('blosumCalculatorControllers', []);
+
+controllers.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.text = 'Hello world!';
-});
+    $scope.inputSequence = '';
+    $scope.sequences = [];
+    $scope.addSequence = function() {
+        $scope.sequences.push($scope.inputSequence);
+    };
+}]);
