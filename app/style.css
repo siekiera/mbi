@@ -1,3 +1,22 @@
+/* Custom elements */
 td.rmatrix-cell-current {
     background-color: #ffff00;
+}
+
+body {
+    font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+    font-size: 62.5%;
+}
+
+
+/* JQueryUI elements */
+.ui-progressbar {
+    position: relative;
+}
+.progress-label {
+    position: absolute;
+    /*left: 10%;*/
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
 }

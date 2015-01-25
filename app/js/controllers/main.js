@@ -98,6 +98,7 @@ controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
             $scope.stageId++;
             $scope.loadStage();
             $scope.currentStep = 0;
+            uiUpdate($scope);
         }
     };
     $scope.prevStage = function() {
@@ -105,16 +106,19 @@ controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
             $scope.stageId--;
             $scope.loadStage();
             $scope.currentStep = $scope.stepCount;
+            uiUpdate($scope);
         }
     };
     $scope.nextStep = function() {
         if ($scope.currentStep < $scope.stepCount ) {
             $scope.currentStep++;
+            uiUpdate($scope);
         }
     };
     $scope.prevStep = function() {
         if ($scope.currentStep > 0 ) {
             $scope.currentStep--;
+            uiUpdate($scope);
         }
     };
 
@@ -131,6 +135,11 @@ controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
     $scope.getRowsNames = function(uiMatrix) {
         return (uiMatrix.specialRowsNames !== undefined) ? uiMatrix.specialRowsNames : $scope.alphabet;
     };
+    //
+    //$scope.updateUI = function(oldValue, newValue) {
+    //    uiUpdate($scope);
+    //};
+    //$scope.watch('stageId', $scope.updateUI);
 
 
 

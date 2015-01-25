@@ -3,7 +3,8 @@
     <ul>
         <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
     </ul>
-    <p>Etap {{stageId}}; krok: {{currentStep}}/{{stepCount}} {{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}</p>
+    <div class="progressbar" id="stage-progressbar"><div class="progress-label">Etap {{stageId}}</div></div>
+    <div class="progressbar" id="step-progressbar"><div class="progress-label">Krok: {{currentStep}}/{{stepCount}} {{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}</div></div>
 
     <div ng-repeat="uiMatrix in uiMatricesOnLeft">
         <p>{{uiMatrix.description}}</p>
