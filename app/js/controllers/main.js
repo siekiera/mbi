@@ -135,6 +135,17 @@ controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
     $scope.getRowsNames = function(uiMatrix) {
         return (uiMatrix.specialRowsNames !== undefined) ? uiMatrix.specialRowsNames : $scope.alphabet;
     };
+    $scope.writeNumber = function (num) {
+        if (num == Infinity) {
+            return '∞';
+        }
+        if (num == -Infinity) {
+            return '-∞';
+        }
+        return Math.round(num * 100) / 100;
+    };
+
+
     //
     //$scope.updateUI = function(oldValue, newValue) {
     //    uiUpdate($scope);
