@@ -1,5 +1,6 @@
 uiInit = function () {
     $( "input[type=submit], a, button" ).button();
+    $(".control-buttons").buttonset();
     var progressbar = $(".progressbar");
     progressbar.progressbar({
         value: 0
