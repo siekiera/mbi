@@ -31,11 +31,15 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
             setCalculateButtonDisabled(true);
         }
     };
-    $scope.$on('$viewContentLoaded', uiInit);
+    $scope.$on('$viewContentLoaded', function() {
+        uiInit();
+        setCalculateButtonDisabled(true);
+        showDialog("#dialog-sequence");
+    });
 
 }]);
 
-controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
+controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMService) {
     $scope.stageId = 1;
     $scope.sequences = $scope.$parent.sequences;
     console.log($scope.sequences);
@@ -141,6 +145,9 @@ controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
             $scope.currentStep--;
             uiUpdate($scope);
         }
+    };
+    $scope.changeSeqs = function() {
+        window.location.reload();
     };
 
     $scope.rowsInCurrentStep = function () {

@@ -88,9 +88,9 @@
     <div class="control-buttons">
         <button ng-click="prevStage()">Poprzedni etap<span class="ui-icon ui-icon-arrow-1-w" style="display: inline-block"></span></span></button>
         <button ng-click="prevStep()">Poprzedni krok<span class="ui-icon ui-icon-triangle-1-w" style="display: inline-block"></span></button>
-        <form action="#/seqInput" style="display: inline">
-            <button>Zmień sekwencje<span class="ui-icon ui-icon-refresh" style="display: inline-block"></span></button>
-        </form>
+        <!--<form action="#/seqInput" method="get" style="display: inline">-->
+            <button ng-click="changeSeqs()">Zmień sekwencje<span class="ui-icon ui-icon-refresh" style="display: inline-block"></span></button>
+        <!--</form>-->
         <button ng-click="nextStep()">Następny krok<span class="ui-icon ui-icon-triangle-1-e" style="display: inline-block"></span></button>
         <button ng-click="nextStage()">Następny etap<span class="ui-icon ui-icon-arrow-1-e" style="display: inline-block"></span></button>
     </div>

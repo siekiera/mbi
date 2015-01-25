@@ -14,7 +14,17 @@ uiInit = function () {
             }
         }
     });
-    setCalculateButtonDisabled(true);
+    $("#dialog-sequence").dialog({
+        autoOpen: false,
+        closeOnEscape: false,
+        modal: true,
+        open: function(event, ui) {
+            //hide close button.
+            $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+        }
+    }).find("#button-calculate").click(function() {
+        $("#dialog-sequence").dialog("close");
+    });
 };
 
 uiUpdate = function(scope) {
