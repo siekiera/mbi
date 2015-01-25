@@ -18,7 +18,11 @@ body {
 }
 
 
+
 /* JQueryUI elements */
+.ui-widget{
+    font-size: 11pt !important;
+}
 .ui-progressbar {
     position: relative;
 }

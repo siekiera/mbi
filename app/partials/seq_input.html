@@ -12,7 +12,9 @@
             <td class="ui-state-default ui-corner-all" ng-click="removeSequence($index)"><span class="ui-icon ui-icon-trash"></span></td>
          </tr>
     </table>
-    <a href="#/stage">Oblicz</a>
+    <form action="#/stage">
+        <button id="button-calculate">Oblicz</button>
+    </form>
 </div>
 
 <div id="dialog-incorrect-size" class="dialog" title="Niepoprawna długość sekwencji">

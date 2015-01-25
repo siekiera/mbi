@@ -14,6 +14,7 @@ uiInit = function () {
             }
         }
     });
+    setCalculateButtonDisabled(true);
 };
 
 uiUpdate = function(scope) {
@@ -24,4 +25,10 @@ uiUpdate = function(scope) {
 
 showDialog = function(id) {
     $(id).dialog("open");
+};
+
+setCalculateButtonDisabled = function(disabled) {
+    $("#button-calculate").button({
+        disabled: disabled
+    });
 };

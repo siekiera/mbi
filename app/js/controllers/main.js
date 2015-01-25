@@ -13,6 +13,7 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
         if ($scope.inputSequence.length == 0) return;
         if ($scope.sequences.length == 0) {
             $scope.sequenceLength = $scope.inputSequence.length;
+            setCalculateButtonDisabled(false);
         } else if ($scope.sequenceLength != $scope.inputSequence.length) {
             showDialog("#dialog-incorrect-size");
             return;
@@ -22,6 +23,9 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
     };
     $scope.removeSequence = function(index) {
         $scope.sequences.splice(index, 1);
+        if ($scope.sequences.length <= 0) {
+            setCalculateButtonDisabled(true);
+        }
     };
     $scope.$on('$viewContentLoaded', uiInit);
 
