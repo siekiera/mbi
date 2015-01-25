@@ -7,7 +7,11 @@
 
     <table class="seq-input">
         <tr>
-            <td><input ng-model="inputSequence"/></td>
+            <td>
+                <form ng-submit="addSequence()">
+                    <input ng-model="inputSequence"/>
+                </form>
+            </td>
             <td class="ui-state-default ui-corner-all" ng-click="addSequence()"><span class="ui-icon ui-icon-circle-check"></span></td>
         </tr>
         <tr class="ui-widget-content ui-corner-all" ng-repeat="seq in sequences track by $index">
