@@ -48,6 +48,7 @@ controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMSer
     $scope.content = [];
     $scope.currentStep = 0;
     $scope.stageName = '';
+    $scope.showImage = false;
     $scope.alphabet = $scope.algoResults.alphabet;
     $scope.uiMatrices = {
         substitution: {
@@ -91,26 +92,31 @@ controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMSer
                 $scope.uiMatricesOnLeft = [];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.substitution;
                 $scope.stageName = 'Obliczanie macierzy podstawień';
+                $scope.showImage = false;
                 break;
             case 2:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.substitution];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.q_pair_prob_est;
                 $scope.stageName = 'Estymacja prawdopodobieństwa pary q(i,j)';
+                $scope.showImage = true;
                 break;
             case 3:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.substitution, $scope.uiMatrices.q_pair_prob_est];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.p_symbol_pair_matrix;
                 $scope.stageName = 'Obliczanie prawdopodobieństw symboli p(i)';
+                $scope.showImage = true;
                 break;
             case 4:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.q_pair_prob_est, $scope.uiMatrices.p_symbol_pair_matrix];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.e_matrix;
                 $scope.stageName = 'Obliczanie macierzy e(i,j)';
+                $scope.showImage = true;
                 break;
             case 5:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.e_matrix];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.blosum_matrix;
                 $scope.stageName = 'Obliczanie macierzy BLOSUM';
+                $scope.showImage = false;
                 break;
         }
         $scope.rightRowsNames = $scope.getRowsNames($scope.uiMatrixOnRight);
