@@ -41,7 +41,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
             scope.msgDifferentLength = 'Sekwencje mają różną długość!';
             scope.msgNoSequence = 'Nie podano wystarczającej liczby sekwencji,' +
                 ' obliczenie macierzy BLOSUM nie jest możliwe!';
-            scope.hintSubMatrix = 'Liczba podstawień symbolu \'%s\' na symbol \'%s\' dla kolejnych pozycji w sekwencji: %s = %d';
+            scope.hintSubMatrix = 'Liczba podstawień symbolu \'%s\' na symbol \'%s\' dla kolejnych pozycji w sekwencjach: %s = %d';
             scope.hintSubMatrixElem ="%d";
             scope.hintSymMatrixElemDivider = ' + ';
             scope.hintProbMatrix = 'Suma komórek w macierzy podstawień: %d.' +

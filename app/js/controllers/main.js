@@ -21,6 +21,7 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
         if ($scope.sequences.length > 1) {
             setCalculateButtonDisabled(false);
         }
+        $scope.inputSequence = '';
     };
     $scope.removeSequence = function(index) {
         $scope.sequences.splice(index, 1);
