@@ -76,6 +76,7 @@ p.p-seq {
 
 #stage-table td {
     vertical-align: top;
+    overflow: hidden;
 }
 
 html, body {
