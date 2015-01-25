@@ -26,6 +26,7 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
         e_matrix: [[-1, -2, -3], [-3, -4, 2.4]],
         blosum_matrix: [[9, 8, 7], [6, 5, 3], [2, 1, 0]]
     };
+    $scope.alphabet = ['A', 'B', 'C'];
     $scope.uiMatrices = {
         substitution: {
             matrix: $scope.matrices.substitution_matrix,
@@ -39,7 +40,7 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
         },
         p_symbol_pair_matrix: {
             matrix: $scope.matrices.p_symbol_pair_matrix,
-            visible: false,
+            specialRowsNames: ['p_ij'],
             description: 'Macierz prawdopodobieństw symboli p_i_j'
         },
         e_matrix: {
@@ -57,6 +58,8 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
     $scope.uiMatrixOnRight = null;
     $scope.uiMatrixOnRightWidth = 0;
     $scope.stepCount = 0;
+    $scope.colsNames = $scope.alphabet;
+    $scope.rightRowsNames = [];
 
     $scope.loadStage = function() {
         switch ($scope.stageId) {
@@ -81,6 +84,7 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
                 $scope.uiMatrixOnRight = $scope.uiMatrices.blosum_matrix;
                 break;
         }
+        $scope.rightRowsNames = $scope.getRowsNames($scope.uiMatrixOnRight);
         $scope.uiMatrixOnRightWidth = $scope.uiMatrixOnRight.matrix.length > 0 ? $scope.uiMatrixOnRight.matrix[0].length : 0;
         $scope.stepCount = $scope.uiMatrixOnRight.matrix.length * $scope.uiMatrixOnRightWidth;
     };
@@ -120,6 +124,10 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
         }
         return cols;
     };
+    $scope.getRowsNames = function(uiMatrix) {
+        return (uiMatrix.specialRowsNames !== undefined) ? uiMatrix.specialRowsNames : $scope.alphabet;
+    };
+
 
 
     // initialization
