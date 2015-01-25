@@ -1,5 +1,5 @@
 uiInit = function () {
-    $( "input[type=submit], a, button" ).button();
+    $( "input[type=submit], input[type=file], a, button" ).button();
     $(".control-buttons").buttonset();
     var progressbar = $(".progressbar");
     progressbar.progressbar({
@@ -24,6 +24,21 @@ uiInit = function () {
         }
     }).find("#button-calculate").click(function() {
         $("#dialog-sequence").dialog("close");
+    });
+    $("#file").change(function () {
+        // Provide file reader functionality
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var text = reader.result;
+            var scope = angular.element($("#file")).scope();
+            scope.sequences.length = 0;
+            text.split("\n").forEach(function(entry) {
+                scope.inputSequence = entry;
+                scope.addSequence();
+                scope.$apply();
+            });
+        };
+        reader.readAsText(this.files[0]);
     });
 };
 

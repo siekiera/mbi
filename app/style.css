@@ -44,6 +44,27 @@ p.p-seq {
     width: 40%;
 }
 
+
+#files {
+    /*position: relative;*/
+
+    width: 50px !important;
+    max-width: 50px !important;
+    /*overflow: hidden;*/
+
+}
+
+#file {
+    position:absolute;
+    left: -30%;
+    z-index:99; /* bring the real upload interactivity up front */
+    /* start of transparency styles */
+    opacity:0;
+    -moz-opacity:0;
+    filter:alpha(opacity:0);
+    /* end of transparency styles */
+}
+
 #stage-table {
     margin: 0 auto;
     padding: 0 auto;
