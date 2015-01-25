@@ -6,9 +6,22 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.text = 'Hello world!';
     $scope.inputSequence = '';
     $scope.sequences = [];
+    $scope.$parent.sequences = $scope.sequences;
+    $scope.sequenceLength = 0;
     $scope.addSequence = function() {
+        // Perform verification to avoid sequences of different length and empty
+        if ($scope.inputSequence.length == 0) return;
+        if ($scope.sequences.length == 0) {
+            $scope.sequenceLength = $scope.inputSequence.length;
+        } else if ($scope.sequenceLength != $scope.inputSequence.length) {
+            showDialog("#dialog-incorrect-size");
+            return;
+        }
+        // Add
         $scope.sequences.push($scope.inputSequence);
-        $scope.$parent.sequences = $scope.sequences;
+    };
+    $scope.removeSequence = function(index) {
+        $scope.sequences.splice(index, 1);
     };
     $scope.$on('$viewContentLoaded', uiInit);
 

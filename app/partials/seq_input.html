@@ -1,10 +1,20 @@
 <div>
     <p>Internal {{ text }}</p>
 
-    <input ng-model="inputSequence"/>
-    <button name="Dodaj" ng-click="addSequence()">Dodaj</button>
-    <ul>
-        <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
-    </ul>
+
+    <table class="seq-input">
+        <tr>
+            <td><input ng-model="inputSequence"/></td>
+            <td class="ui-state-default ui-corner-all" ng-click="addSequence()"><span class="ui-icon ui-icon-circle-check"></span></td>
+        </tr>
+        <tr class="ui-widget-content ui-corner-all" ng-repeat="seq in sequences track by $index">
+            <td>{{ seq }}</td>
+            <td class="ui-state-default ui-corner-all" ng-click="removeSequence($index)"><span class="ui-icon ui-icon-trash"></span></td>
+         </tr>
+    </table>
     <a href="#/stage">Oblicz</a>
+</div>
+
+<div id="dialog-incorrect-size" class="dialog" title="Niepoprawna długość sekwencji">
+    Wszystkie sekwencje muszą być tej samej długości!
 </div>
