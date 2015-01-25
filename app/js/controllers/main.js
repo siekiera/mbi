@@ -10,6 +10,7 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
         $scope.sequences.push($scope.inputSequence);
         $scope.$parent.sequences = $scope.sequences;
     };
+    $scope.$on('$viewContentLoaded', uiInit);
 
 }]);
 
@@ -135,5 +136,6 @@ controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
 
     // initialization
     $scope.loadStage();
+    $scope.$on('$viewContentLoaded', uiInit);
 
 });
