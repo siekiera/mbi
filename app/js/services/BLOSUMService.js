@@ -188,7 +188,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
 
             matrices['substitutionMatrixHint']= substitutionMatrixHint;
             matrices['pairProbabilityMatrixHint']= pairProbabilityMatrixHint;
-            matrices['symbolProbabilityMatrixHint']= symbolProbabilityMatrixHint;
+            matrices['symbolProbabilityMatrixHint']= [symbolProbabilityMatrixHint];
             matrices['eMatrixHint']= eMatrixHint;
             matrices['BLOSUMMatrixHint']= BLOSUMMatrixHint;
 
