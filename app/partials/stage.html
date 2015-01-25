@@ -1,65 +1,97 @@
-<div>
-    <p>Sekwencje: </p>
-    <ul>
-        <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
-    </ul>
-    <div class="progressbar" id="stage-progressbar"><div class="progress-label">Etap {{stageId}}</div></div>
-    <div class="progressbar" id="step-progressbar"><div class="progress-label">Krok: {{currentStep}}/{{stepCount}} {{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}</div></div>
+<div id="stage-content">
+    <table id="stage-table">
+        <tr class="ui-state-default">
+            <td>Sekwencje</td>
+            <td>Macierze wejściowe</td>
+            <td>Macierz wyjściowa</td>
+        </tr>
+        <tr>
+            <td>
 
-    <div ng-repeat="uiMatrix in uiMatricesOnLeft">
-        <p>{{uiMatrix.description}}</p>
-        <table class="matrix-table">
-            <tr>
-                <td class="ui-state-default"></td>
-                <td class="ui-state-default" ng-repeat="name in colsNames">
-                    {{ name }}
-                </td>
-            </tr>
-            <tr ng-repeat="row in uiMatrix.matrix track by $index">
-                <td class="ui-state-default">{{getRowsNames(uiMatrix)[$index]}}</td>
-                <td class="ui-widget-content" ng-repeat="cell in row track by $index">{{ writeNumber(cell) }}</td>
-            </tr>
-        </table>
-    </div>
-    <hr/>
-    <div>
-        <p>{{uiMatrixOnRight.description}}</p>
-        <table class="matrix-table">
-            <tr>
-                <td class="ui-state-default"></td>
-                <td class="ui-state-default" ng-repeat="name in colsNames">
-                    {{ name }}
-                </td>
-            </tr>
-            <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index" ng-show="$index + 1 < rowsInCurrentStep()">
-                <td class="ui-state-default">{{rightRowsNames[$index]}}</td>
-                <td class="ui-widget-content" ng-repeat="cell in row track by $index">
-                    {{ writeNumber(cell) }}
-                </td>
-            </tr>
-            <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index" ng-show="$index + 1 == rowsInCurrentStep()">
-                <td class="ui-state-default">{{rightRowsNames[$index]}}</td>
-                <td class="rmatrix-cell-standard, ui-widget-content" ng-repeat="cell in row track by $index" ng-show="$index + 1 < colsInLastRow()">
-                    {{ writeNumber(cell) }}
-                </td>
-                <td class="rmatrix-cell-current" ng-repeat="cell in row track by $index" ng-show="$index + 1 == colsInLastRow()">
-                    {{ writeNumber(cell) }}
-                </td>
-                <td class="ui-widget-content" ng-repeat="cell in row track by $index" ng-show="$index + 1 > colsInLastRow()">
+                <p>Sekwencje: </p>
+                <ul>
+                    <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
+                </ul>
+            </td>
+            <td>
+                <div ng-repeat="uiMatrix in uiMatricesOnLeft">
+                    <p>{{uiMatrix.description}}</p>
+                    <table class="matrix-table">
+                        <tr>
+                            <td class="ui-state-default"></td>
+                            <td class="ui-state-default" ng-repeat="name in colsNames">
+                                {{ name }}
+                            </td>
+                        </tr>
+                        <tr ng-repeat="row in uiMatrix.matrix track by $index">
+                            <td class="ui-state-default">{{getRowsNames(uiMatrix)[$index]}}</td>
+                            <td class="ui-widget-content" ng-repeat="cell in row track by $index">{{ writeNumber(cell)
+                                }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <p>{{uiMatrixOnRight.description}}</p>
+                    <table class="matrix-table">
+                        <tr>
+                            <td class="ui-state-default"></td>
+                            <td class="ui-state-default" ng-repeat="name in colsNames">
+                                {{ name }}
+                            </td>
+                        </tr>
+                        <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index"
+                            ng-show="$index + 1 < rowsInCurrentStep()">
+                            <td class="ui-state-default">{{rightRowsNames[$index]}}</td>
+                            <td class="ui-widget-content" ng-repeat="cell in row track by $index">
+                                {{ writeNumber(cell) }}
+                            </td>
+                        </tr>
+                        <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index"
+                            ng-show="$index + 1 == rowsInCurrentStep()">
+                            <td class="ui-state-default">{{rightRowsNames[$index]}}</td>
+                            <td class="rmatrix-cell-standard, ui-widget-content" ng-repeat="cell in row track by $index"
+                                ng-show="$index + 1 < colsInLastRow()">
+                                {{ writeNumber(cell) }}
+                            </td>
+                            <td class="rmatrix-cell-current" ng-repeat="cell in row track by $index"
+                                ng-show="$index + 1 == colsInLastRow()">
+                                {{ writeNumber(cell) }}
+                            </td>
+                            <td class="ui-widget-content" ng-repeat="cell in row track by $index"
+                                ng-show="$index + 1 > colsInLastRow()">
 
-            </tr>
-            <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index" ng-show="$index + 1 > rowsInCurrentStep()">
-                <td class="ui-state-default">{{rightRowsNames[$index]}}</td>
-                <td class="ui-widget-content" ng-repeat="cell in row track by $index">
-                </td>
-            </tr>
-        </table>
+                        </tr>
+                        <tr ng-repeat="row in uiMatrixOnRight.matrix track by $index"
+                            ng-show="$index + 1 > rowsInCurrentStep()">
+                            <td class="ui-state-default">{{rightRowsNames[$index]}}</td>
+                            <td class="ui-widget-content" ng-repeat="cell in row track by $index">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+    <div class="progressbar" id="stage-progressbar">
+        <div class="progress-label">Etap {{stageId}}</div>
     </div>
+    <div class="progressbar" id="step-progressbar">
+        <div class="progress-label">Krok: {{currentStep}}/{{stepCount}}
+            {{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}
+        </div>
+    </div>
+
     <div class="control-buttons">
-
-        <button ng-click="nextStage()">Następny etap</button>
-        <button ng-click="nextStep()">Następny krok</button>
-        <button ng-click="prevStep()">Poprzedni krok</button>
-        <button ng-click="prevStage()">Poprzedni etap</button>
+        <button ng-click="prevStage()">Poprzedni etap<span class="ui-icon ui-icon-arrow-1-w" style="display: inline-block"></span></span></button>
+        <button ng-click="prevStep()">Poprzedni krok<span class="ui-icon ui-icon-triangle-1-w" style="display: inline-block"></span></button>
+        <form action="#/seqInput" style="display: inline">
+            <button>Zmień sekwencje<span class="ui-icon ui-icon-refresh" style="display: inline-block"></span></button>
+        </form>
+        <button ng-click="nextStep()">Następny krok<span class="ui-icon ui-icon-triangle-1-e" style="display: inline-block"></span></button>
+        <button ng-click="nextStage()">Następny etap<span class="ui-icon ui-icon-arrow-1-e" style="display: inline-block"></span></button>
     </div>
 </div>
