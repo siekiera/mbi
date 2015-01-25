@@ -4,28 +4,27 @@
 
 describe('BLOSUM', function() {
     describe('BLOSUMService', function(){
-        var scope, ctrl;
-        beforeEach(module('blosumCalculatorAppDumbComputer'));
-        beforeEach(inject(function($controller, $rootScope,BlosumService) {
-            scope = $rootScope.$new();
-            ctrl = $controller('DumbCtrl', {$scope: scope,BLOSUMService: BlosumService});
+        var service;
+        beforeEach(module('blosumComputer'));
+        beforeEach(inject(function(BLOSUMService) {
+            service = BLOSUMService;
         }));
 
         it('should compute alphabet size (single sequence)', function() {
             var inData = ['ABC','BCA'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['alphabetSize']).toEqual(3);
         });
 
         it('should compute alphabet size', function() {
             var inData = ['ABC','BDA'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['alphabetSize']).toEqual(4);
         });
 
         it('should compute substitution matrix', function() {
             var inData = ['ABC','BBC','CBB'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['substitutionMatrix'].length).toEqual(3);
             expect(matrices['substitutionMatrix'][0].length).toEqual(3);
             expect(matrices['substitutionMatrix'][0]).toEqual([0,1,1]);
@@ -35,7 +34,7 @@ describe('BLOSUM', function() {
 
         it('should compute pairProbability matrix', function() {
             var inData = ['AB','BA'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['substitutionMatrix'].length).toEqual(2);
             expect(matrices['substitutionMatrix'][0].length).toEqual(2);
             expect(matrices['substitutionMatrix'][0]).toEqual([0,2]);
@@ -46,7 +45,7 @@ describe('BLOSUM', function() {
 
         it('should compute pairProbability matrix', function() {
             var inData = ['AB','BA'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['substitutionMatrix'].length).toEqual(2);
             expect(matrices['substitutionMatrix'][0].length).toEqual(2);
             expect(matrices['substitutionMatrix'][0]).toEqual([0,2]);
@@ -60,14 +59,14 @@ describe('BLOSUM', function() {
 
         it('should compute symbolProbability matrix', function() {
             var inData = ['AB','BA'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['symbolProbabilityMatrix'][0]).toBeCloseTo(0.5);
             expect(matrices['symbolProbabilityMatrix'][1]).toBeCloseTo(0.5);
         });
 
         it('should compute symbolProbability matrix', function() {
             var inData = ['ABCD','DCBA','DBAC'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['symbolProbabilityMatrix'][0]).toBeCloseTo(1/4);
             expect(matrices['symbolProbabilityMatrix'][1]).toBeCloseTo(1/4);
             expect(matrices['symbolProbabilityMatrix'][2]).toBeCloseTo(1/4);
@@ -76,7 +75,7 @@ describe('BLOSUM', function() {
 
         it('should compute symbolProbability matrix', function() {
             var inData = ['AABC','AABD','AABE'];
-            var matrices = scope.fun(inData);
+            var matrices = service.getMatrices(inData);
             expect(matrices['symbolProbabilityMatrix'][0]).toBeCloseTo(1/2);
             expect(matrices['symbolProbabilityMatrix'][1]).toBeCloseTo(1/4);
             expect(matrices['symbolProbabilityMatrix'][2]).toBeCloseTo(1/12);

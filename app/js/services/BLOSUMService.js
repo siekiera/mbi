@@ -1,4 +1,4 @@
-var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
+var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
     function()
     {
         this.getMatrices = function(inData)
@@ -20,58 +20,55 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
                 return matrix;
             };
 
+            //return value
             matrices = {};
+            matrices['error'] = false;
 
+            //constants
             scope = {};
-            scope.outFinished = false;
-            scope.outError = false;
-            scope.outErrorMessage = '';
-
             scope.msgDifferentLength = 'Sequences of different length!';
             scope.msgNoSequence = 'Not enough sequences provided, BLOSUM matrix computation impossible!';
-
             scope.hintSubMatrix = 'Substitution count for (%s,%s) is %s = %d';
             scope.hintSubMatrixElem ="%d";
             scope.hintSymMatrixElemDivider = ' + ';
             scope.hintProbMatrix = 'Sum of all cells in substitution matrix is %d.' +
-            ' Probability for pair (%s,%s) is %d/%d = %.2f';
+                ' Probability for pair (%s,%s) is %d/%d = %.2f';
             scope.hintSymMatrix = 'Probability for symbol %s is %s = %.2f';
             scope.hintSymMatrixElem = '%.2f';
             scope.hintSymMatrixElemDivider = ' + ';
             scope.hintEMatrix = 'E(%s,%s) value is 2*log2(%.2f/(%.2f*%.2f)) = %.2f';
             scope.hintBLOSUMMatrix = 'BLOSUM(%s,%s) value is round(%.2f) = %d';
 
-            scope.outError = false;
-
-            var characterset = {};
             var sequences = inData;
-            if (sequences.length <= 1) {
-                scope.outErrorMessage = scope.msgNoSequence;
-                scope.outError = true;
-                return;
+
+            //compute alphabet, sequenceLength, alphabetSize, mapLetterInt
+            var characterset = {};
+            if (sequences == undefined || sequences.length <= 1) {
+                matrices['errorMessage'] = scope.msgNoSequence;;
+                matrices['error'] = true;
+                return matrices;
             }
             var sequenceLength = sequences[0].length;
-
             sequences.forEach(function (sequence) {
                 len = sequence.length;
                 if (len != sequenceLength) {
-                    scope.outErrorMessage = scope.msgDifferentLength;
-                    scope.outError = true;
-                    return;
+                    matrices['errorMessage'] = scope.msgDifferentLength;
+                    matrices['error'] = true;
+                    return matrices;
                 }
                 for (var i = 0; i < len; i++) {
                     var symbol = sequence[i];
                     characterset[symbol] = true;
                 }
             });
-
             var alphabet = Object.keys(characterset).sort();
             var alphabetSize = Object.keys(characterset).length;
             var mapLetterInt = {};
-
             for (var i = 0; i < alphabetSize; ++i) {
                 mapLetterInt[alphabet[i]] = i;
             }
+
+
             //init substitutionMatrix
             var substitutionMatrix = getSquareMatrix(alphabetSize);
             var substitutionMatrixHint = getSquareMatrix(alphabetSize);
@@ -119,7 +116,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
                 }
             }
 
-            console.log(substitutionMatrixHint[0][0]);
+            //console.log(substitutionMatrixHint[0][0]);
 
             //compute pairProbabilityMatrix
             var pairProbabilityMatrix = getSquareMatrix(alphabetSize);
@@ -133,7 +130,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
                 return value;
             });
 
-            console.log(pairProbabilityMatrixHint[0][0]);
+            //console.log(pairProbabilityMatrixHint[0][0]);
 
             //compute symbolProbabilityMatrix
             var symbolProbabilityMatrix = new Array(alphabetSize);
@@ -157,7 +154,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
                 symbolProbabilityMatrixHint[i] = sprintf(scope.hintSymMatrix,alphabet[i],symbolHintString,symbolProbabilityMatrix[i])
             }
 
-            console.log(symbolProbabilityMatrixHint[0]);
+            //console.log(symbolProbabilityMatrixHint[0]);
 
             //compute eMatrix
             var eMatrix = getSquareMatrix(alphabetSize);
@@ -170,7 +167,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
                 return 2*Math.log2(pairProbabilityMatrix[i][j]/(symbolProbabilityMatrix[i]*symbolProbabilityMatrix[j]));
             });
 
-            console.log(eMatrixHint[0][0]);
+            //console.log(eMatrixHint[0][0]);
 
             //compute BLOSUMMatrix
             var BLOSUMMatrix = getSquareMatrix(alphabetSize);
@@ -181,7 +178,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BlosumService',
                 return Math.round(eMatrix[i][j]);
             });
 
-            console.log(BLOSUMMatrixHint[0][0]);
+            //console.log(BLOSUMMatrixHint[0][0]);
 
             matrices['substitutionMatrix']= substitutionMatrix;
             matrices['pairProbabilityMatrix']= pairProbabilityMatrix;

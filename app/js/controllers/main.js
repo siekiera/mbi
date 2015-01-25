@@ -1,6 +1,6 @@
 'use strict';
 
-var controllers = angular.module('blosumCalculatorControllers', []);
+var controllers = angular.module('blosumCalculatorControllers',['blosumComputer']);
 
 controllers.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.text = 'Hello world!';
@@ -13,43 +13,46 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
 
 }]);
 
-controllers.controller('StageCtrl', ['$scope', function ($scope) {
+controllers.controller('StageCtrl', function ($scope,$location,BLOSUMService) {
     $scope.stageId = 1;
     $scope.sequences = $scope.$parent.sequences;
+    console.log($scope.sequences);
+    $scope.algoResults = BLOSUMService.getMatrices($scope.sequences);
+    if($scope.algoResults == undefined || $scope.algoResults.error)
+    {
+        $location.path('/');
+    }
     $scope.content = [];
     $scope.currentStep = 0;
-    $scope.matrices = {
-        // FIXME:: Mock - should be received from the algorithm
-        substitution_matrix: [[1, 2, 2], [4, 5, 6], [7,8 , 9]],
-        q_pair_prob_est_matrix: [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6], [0.7, 0.8, 0.9]],
-        p_symbol_pair_matrix: [[0.1, 0.2, 0.3]],
-        e_matrix: [[-1, -2, -3], [-3, -4, 2.4]],
-        blosum_matrix: [[9, 8, 7], [6, 5, 3], [2, 1, 0]]
-    };
-    $scope.alphabet = ['A', 'B', 'C'];
+    $scope.alphabet = $scope.algoResults.alphabet;
     $scope.uiMatrices = {
         substitution: {
-            matrix: $scope.matrices.substitution_matrix,
+            matrix: $scope.algoResults.substitutionMatrix,
+            hints: $scope.algoResults.substitutionMatrixHint,
             visible: false,
             description: 'Macierz podstawień'
         },
         q_pair_prob_est: {
-            matrix: $scope.matrices.q_pair_prob_est_matrix,
+            matrix: $scope.algoResults.pairProbabilityMatrix,
+            hints: $scope.algoResults.pairProbabilityMatrixHint,
             visible: false,
             description: 'Macierz estymacji prawdopodobieństw par q_i_j'
         },
         p_symbol_pair_matrix: {
-            matrix: $scope.matrices.p_symbol_pair_matrix,
+            matrix: $scope.algoResults.symbolProbabilityMatrix,
+            hints: $scope.algoResults.symbolProbabilityMatrixHint,
             specialRowsNames: ['p_ij'],
             description: 'Macierz prawdopodobieństw symboli p_i_j'
         },
         e_matrix: {
-            matrix: $scope.matrices.e_matrix,
+            matrix: $scope.algoResults.eMatrix,
+            hints: $scope.algoResults.eMatrixHint,
             visible: false,
             description: 'Macierz E'
         },
         blosum_matrix: {
-            matrix: $scope.matrices.blosum_matrix,
+            matrix: $scope.algoResults.BLOSUMMatrix,
+            hints: $scope.algoResults.BLOSUMMatrixHint,
             description: 'Macierz BLOSUM'
         }
     };
@@ -133,4 +136,4 @@ controllers.controller('StageCtrl', ['$scope', function ($scope) {
     // initialization
     $scope.loadStage();
 
-}]);
+});
