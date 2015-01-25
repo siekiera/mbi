@@ -1,4 +1,4 @@
-<h2 class="title">Obliczanie macierzy BLOSUM</h3>
+<h3 class="title">Obliczanie macierzy BLOSUM</h3>
 <div class="progressbar" id="stage-progressbar">
     <div class="progress-label">Etap {{stageId}}: {{stageName}}</div>
 </div>
@@ -91,6 +91,9 @@
                     <p></p>
                     <div class="description">
                         <p>{{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}</p>
+                        <div class="div-imageHint" ng-if="stageId >= 2 && stageId <= 4">
+                            <img class="imageHint" ng-src="img/{{stageId}}.png"/>
+                        </div>
                     </div>
                 </div>
             </td>
