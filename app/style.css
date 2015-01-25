@@ -26,8 +26,22 @@ span {
 }
 
 table.matrix-table {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 auto;
     table-layout: fixed;
+}
+ul {
+    list-style-position: inside;
+}
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+p.p-seq {
+    width: 40%;
 }
 
 #stage-table {
@@ -51,13 +65,14 @@ html, body {
 /* JQueryUI elements */
 .ui-widget{
     font-size: 11pt !important;
+    border-radius: 8px !important;
 }
 .ui-progressbar {
     position: relative;
 }
 .progress-label {
     position: absolute;
-    /*left: 10%;*/
+    left: 20px;
     top: 4px;
     font-weight: bold;
     text-shadow: 1px 1px 0 #fff;

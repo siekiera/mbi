@@ -7,11 +7,7 @@
         </tr>
         <tr>
             <td>
-
-                <p>Sekwencje: </p>
-                <ul>
-                    <li ng-repeat="seq in sequences track by $index">{{ seq }}</li>
-                </ul>
+                <p class="p-seq ui-state-default ui-corner-all" ng-repeat="seq in sequences track by $index">{{ seq }}</p>
             </td>
             <td>
                 <div ng-repeat="uiMatrix in uiMatricesOnLeft">
@@ -76,9 +72,11 @@
 
         </tr>
     </table>
+    <p></p>
     <div class="progressbar" id="stage-progressbar">
         <div class="progress-label">Etap {{stageId}}</div>
     </div>
+    <p></p>
     <div class="progressbar" id="step-progressbar">
         <div class="progress-label">Krok: {{currentStep}}/{{stepCount}}
             {{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}
