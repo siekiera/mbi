@@ -1,6 +1,6 @@
 /* Custom elements */
 td.rmatrix-cell-current {
-    background-color: #ffff00;
+    background-color: #ffff66;
     .ui-widget-content;
 }
 
@@ -61,6 +61,20 @@ html, body {
     height: 100%;
 }
 
+.description {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 auto;
+    /*background-color: lightyellow !important;*/
+}
+
+.description p {
+    padding: 10px;
+    /*background-color: #ffff66;*/
+}
+.title {
+    text-align: center;
+}
 
 /* JQueryUI elements */
 .ui-widget{
@@ -72,8 +86,12 @@ html, body {
 }
 .progress-label {
     position: absolute;
-    left: 20px;
+    left: 30px;
     top: 4px;
     font-weight: bold;
     text-shadow: 1px 1px 0 #fff;
+}
+
+.ui-state-highlight {
+    background-color: lightyellow !important;
 }

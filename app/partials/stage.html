@@ -1,4 +1,5 @@
 <div id="stage-content">
+    <h3 class="title">Obliczanie macierzy BLOSUM</h3>
     <table id="stage-table">
         <tr class="ui-state-default">
             <td>Sekwencje</td>
@@ -67,6 +68,10 @@
                             </td>
                         </tr>
                     </table>
+                    <p></p>
+                    <div class="description">
+                        <p>{{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}</p>
+                    </div>
                 </div>
             </td>
 
@@ -78,13 +83,12 @@
     </div>
     <p></p>
     <div class="progressbar" id="step-progressbar">
-        <div class="progress-label">Krok: {{currentStep}}/{{stepCount}}
-            {{uiMatrixOnRight.hints[rowsInCurrentStep()-1][colsInLastRow()-1]}}
-        </div>
+        <div class="progress-label">Krok: {{currentStep}} / {{stepCount}}</div>
     </div>
+    <p></p>
 
     <div class="control-buttons">
-        <button ng-click="prevStage()">Poprzedni etap<span class="ui-icon ui-icon-arrow-1-w" style="display: inline-block"></span></span></button>
+        <button ng-click="prevStage()">Poprzedni etap<span class="ui-icon ui-icon-arrow-1-w" style="display: inline-block"></span></button>
         <button ng-click="prevStep()">Poprzedni krok<span class="ui-icon ui-icon-triangle-1-w" style="display: inline-block"></span></button>
         <!--<form action="#/seqInput" method="get" style="display: inline">-->
             <button ng-click="changeSeqs()">Zmień sekwencje<span class="ui-icon ui-icon-refresh" style="display: inline-block"></span></button>

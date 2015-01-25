@@ -17,17 +17,19 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
         }
         if ($scope.sequences.length == 0) {
             $scope.sequenceLength = $scope.inputSequence.length;
-            setCalculateButtonDisabled(false);
         } else if ($scope.sequenceLength != $scope.inputSequence.length) {
             showDialog("#dialog-incorrect-size");
             return;
         }
         // Add
         $scope.sequences.push($scope.inputSequence);
+        if ($scope.sequences.length > 1) {
+            setCalculateButtonDisabled(false);
+        }
     };
     $scope.removeSequence = function(index) {
         $scope.sequences.splice(index, 1);
-        if ($scope.sequences.length <= 0) {
+        if ($scope.sequences.length <= 1) {
             setCalculateButtonDisabled(true);
         }
     };
