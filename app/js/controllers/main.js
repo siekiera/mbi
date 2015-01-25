@@ -52,30 +52,28 @@ controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMSer
     }
     $scope.content = [];
     $scope.currentStep = 0;
+    $scope.stageName = '';
     $scope.alphabet = $scope.algoResults.alphabet;
     $scope.uiMatrices = {
         substitution: {
             matrix: $scope.algoResults.substitutionMatrix,
             hints: $scope.algoResults.substitutionMatrixHint,
-            visible: false,
             description: 'Macierz podstawień'
         },
         q_pair_prob_est: {
             matrix: $scope.algoResults.pairProbabilityMatrix,
             hints: $scope.algoResults.pairProbabilityMatrixHint,
-            visible: false,
-            description: 'Macierz estymacji prawdopodobieństw par q_i_j'
+            description: 'Macierz estymacji prawdopodobieństw par q(i,j)'
         },
         p_symbol_pair_matrix: {
             matrix: $scope.algoResults.symbolProbabilityMatrix,
             hints: $scope.algoResults.symbolProbabilityMatrixHint,
-            specialRowsNames: ['p_ij'],
-            description: 'Macierz prawdopodobieństw symboli p_i_j'
+            specialRowsNames: ['p(i,j)'],
+            description: 'Macierz prawdopodobieństw symboli p(i,j)'
         },
         e_matrix: {
             matrix: $scope.algoResults.eMatrix,
             hints: $scope.algoResults.eMatrixHint,
-            visible: false,
             description: 'Macierz E'
         },
         blosum_matrix: {
@@ -97,22 +95,27 @@ controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMSer
             case 1:
                 $scope.uiMatricesOnLeft = [];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.substitution;
+                $scope.stageName = 'Obliczanie macierzy podstawień';
                 break;
             case 2:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.substitution];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.q_pair_prob_est;
+                $scope.stageName = 'Estymacja prawdopodobieństwa pary q(i,j)';
                 break;
             case 3:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.substitution, $scope.uiMatrices.q_pair_prob_est];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.p_symbol_pair_matrix;
+                $scope.stageName = 'Obliczanie prawdopodobieństw symboli p(i)';
                 break;
             case 4:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.q_pair_prob_est, $scope.uiMatrices.p_symbol_pair_matrix];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.e_matrix;
+                $scope.stageName = 'Obliczanie macierzy e(i,j)';
                 break;
             case 5:
                 $scope.uiMatricesOnLeft = [$scope.uiMatrices.e_matrix];
                 $scope.uiMatrixOnRight = $scope.uiMatrices.blosum_matrix;
+                $scope.stageName = 'Obliczanie macierzy BLOSUM';
                 break;
         }
         $scope.rightRowsNames = $scope.getRowsNames($scope.uiMatrixOnRight);

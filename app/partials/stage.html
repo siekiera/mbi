@@ -9,6 +9,8 @@
         <tr>
             <td>
                 <p class="p-seq ui-state-default ui-corner-all" ng-repeat="seq in sequences track by $index">{{ seq }}</p>
+
+                <button ng-click="changeSeqs()">Zmień sekwencje<span class="ui-icon ui-icon-refresh" style="display: inline-block"></span></button>
             </td>
             <td>
                 <div ng-repeat="uiMatrix in uiMatricesOnLeft">
@@ -79,7 +81,7 @@
     </table>
     <p></p>
     <div class="progressbar" id="stage-progressbar">
-        <div class="progress-label">Etap {{stageId}}</div>
+        <div class="progress-label">Etap {{stageId}}: {{stageName}}</div>
     </div>
     <p></p>
     <div class="progressbar" id="step-progressbar">
@@ -90,9 +92,6 @@
     <div class="control-buttons">
         <button ng-click="prevStage()">Poprzedni etap<span class="ui-icon ui-icon-arrow-1-w" style="display: inline-block"></span></button>
         <button ng-click="prevStep()">Poprzedni krok<span class="ui-icon ui-icon-triangle-1-w" style="display: inline-block"></span></button>
-        <!--<form action="#/seqInput" method="get" style="display: inline">-->
-            <button ng-click="changeSeqs()">Zmień sekwencje<span class="ui-icon ui-icon-refresh" style="display: inline-block"></span></button>
-        <!--</form>-->
         <button ng-click="nextStep()">Następny krok<span class="ui-icon ui-icon-triangle-1-e" style="display: inline-block"></span></button>
         <button ng-click="nextStage()">Następny etap<span class="ui-icon ui-icon-arrow-1-e" style="display: inline-block"></span></button>
     </div>
