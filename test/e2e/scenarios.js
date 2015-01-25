@@ -13,7 +13,7 @@ describe('PhoneCat App', function() {
         it('should display hello world', function () {
 
             var placeHolderText = element(by.id('textPlaceholder')).getText();
-            expect(placeHolderText).toEqual("Hello world!");
+            expect(placeHolderText).toEqual("");
         });
 
     });

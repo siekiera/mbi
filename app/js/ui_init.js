@@ -33,6 +33,7 @@ uiInit = function () {
             var scope = angular.element($("#file")).scope();
             scope.sequences.length = 0;
             text.split("\n").forEach(function(entry) {
+                entry = entry.replace(/\r/g,'');
                 scope.inputSequence = entry;
                 scope.addSequence();
                 scope.$apply();

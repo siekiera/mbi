@@ -3,7 +3,6 @@
 var controllers = angular.module('blosumCalculatorControllers',['blosumComputer']);
 
 controllers.controller('MainCtrl', ['$scope', function ($scope) {
-    $scope.text = 'Hello world!';
     $scope.inputSequence = '';
     $scope.sequences = [];
     $scope.$parent.sequences = $scope.sequences;
