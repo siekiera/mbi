@@ -129,6 +129,9 @@ controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMSer
             $scope.loadStage();
             $scope.currentStep = 0;
             uiUpdate($scope);
+        } else if ($scope.stageId == 5) {
+            $scope.currentStep = $scope.stepCount;
+            uiUpdate($scope);
         }
     };
     $scope.prevStage = function() {
