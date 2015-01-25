@@ -11,10 +11,6 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
     $scope.addSequence = function() {
         // Perform verification to avoid sequences of different length and empty
         if ($scope.inputSequence.length == 0) return;
-        if (jQuery.inArray($scope.inputSequence, $scope.sequences) >= 0) {
-            showDialog("#dialog-already-exists");
-            return;
-        }
         if ($scope.sequences.length == 0) {
             $scope.sequenceLength = $scope.inputSequence.length;
         } else if ($scope.sequenceLength != $scope.inputSequence.length) {
