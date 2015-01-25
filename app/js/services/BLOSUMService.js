@@ -20,24 +20,38 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                 return matrix;
             };
 
+            var printFloat = function(value) {
+                returnval = '';
+                if (value==Number.NEGATIVE_INFINITY)
+                    returnval = '-∞';
+                else if (value==Number.NEGATIVE_INFINITY)
+                    returnval = '∞';
+                else
+                    returnval = sprintf("%.2f",value);
+                return returnval;
+            }
+
+
             //return value
             matrices = {};
             matrices['error'] = false;
 
             //constants
             scope = {};
-            scope.msgDifferentLength = 'Sequences of different length!';
-            scope.msgNoSequence = 'Not enough sequences provided, BLOSUM matrix computation impossible!';
-            scope.hintSubMatrix = 'Substitution count for (%s,%s) is %s = %d';
+            scope.msgDifferentLength = 'Sekwencje mają różną długość!';
+            scope.msgNoSequence = 'Nie podano wystarczającej liczby sekwencji,' +
+                ' obliczenie macierzy BLOSUM nie jest możliwe!';
+            scope.hintSubMatrix = 'Liczba podstawień symbolu \'%s\' na symbol \'%s\' dla kolejnych pozycji w sekwencji: %s = %d';
             scope.hintSubMatrixElem ="%d";
             scope.hintSymMatrixElemDivider = ' + ';
-            scope.hintProbMatrix = 'Sum of all cells in substitution matrix is %d.' +
-                ' Probability for pair (%s,%s) is %d/%d = %.2f';
-            scope.hintSymMatrix = 'Probability for symbol %s is %s = %.2f';
+            scope.hintProbMatrix = 'Suma komórek w macierzy podstawień: %d.' +
+                ' Prawdopodobieństwo pary (%s,%s) to %d/%d = %.2f';
+            scope.hintSymMatrix = 'Prawdopodobieństowo wystąpienia symbolu \'%s\': %s = %.2f';
             scope.hintSymMatrixElem = '%.2f';
             scope.hintSymMatrixElemDivider = ' + ';
-            scope.hintEMatrix = 'E(%s,%s) value is 2*log2(%.2f/(%.2f*%.2f)) = %.2f';
-            scope.hintBLOSUMMatrix = 'BLOSUM(%s,%s) value is round(%.2f) = %d';
+            scope.hintEMatrix = 'Wartość elementu (%s,%s) w macierzy E wynosi 2*log2(%.2f/(%.2f*%.2f)) = %s';
+            scope.hintBLOSUMMatrix = 'Wartość elementu (%s,%s) w macierzy BLOSUM to zaokrąglona do liczby ' +
+            'całkowitej wartość %s, czyli %s';
 
             var sequences = inData;
 
@@ -100,16 +114,16 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                     }
                 }
 
-                for (var i = 0; i < sequences.length; ++i) {
-                    for (var j = 0; j < sequences.length; ++j) {
+                for (var i = 0; i < alphabetSize; ++i) {
+                    for (var j = 0; j < alphabetSize; ++j) {
                         substitutionMatrixHint[i][j] += sprintf(
                             scope.hintSubMatrixElem,substitutionMatrixHintTemp[i][j]) + scope.hintSymMatrixElemDivider;
                     }
                 }
             }
 
-            for (var i = 0; i < sequences.length; ++i) {
-                for (var j = 0; j < sequences.length; ++j) {
+            for (var i = 0; i < alphabetSize; ++i) {
+                for (var j = 0; j < alphabetSize; ++j) {
                     var elems = substitutionMatrixHint[i][j].substring(0,substitutionMatrixHint[i][j].length - scope.hintSymMatrixElemDivider.length);
                     substitutionMatrixHint[i][j] = sprintf(scope.hintSubMatrix,
                         alphabet[i],alphabet[j],elems,substitutionMatrix[i][j]);
@@ -160,11 +174,12 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
             var eMatrix = getSquareMatrix(alphabetSize);
             var eMatrixHint = getSquareMatrix(alphabetSize);
             fillMatrix(eMatrix, function (i,j) {
+                var value = 2*Math.log2(pairProbabilityMatrix[i][j]/(symbolProbabilityMatrix[i]*symbolProbabilityMatrix[j]));
                 eMatrixHint[i][j] = sprintf(scope.hintEMatrix,
                     alphabet[i],alphabet[j],
                     pairProbabilityMatrix[i][j],symbolProbabilityMatrix[i],symbolProbabilityMatrix[j],
-                    2*Math.log2(pairProbabilityMatrix[i][j]/(symbolProbabilityMatrix[i]*symbolProbabilityMatrix[j])));
-                return 2*Math.log2(pairProbabilityMatrix[i][j]/(symbolProbabilityMatrix[i]*symbolProbabilityMatrix[j]));
+                    printFloat(value));
+                return value;
             });
 
             //console.log(eMatrixHint[0][0]);
@@ -174,7 +189,11 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
             var BLOSUMMatrixHint = getSquareMatrix(alphabetSize);
             fillMatrix(BLOSUMMatrix, function (i,j) {
                 BLOSUMMatrixHint[i][j] = sprintf(scope.hintBLOSUMMatrix,
-                    alphabet[i],alphabet[j],eMatrix[i][j],Math.round(eMatrix[i][j]));
+                    alphabet[i],alphabet[j],
+                    printFloat(eMatrix[i][j]),
+                    (!isFinite(eMatrix[i][j]))
+                        ?printFloat(eMatrix[i][j])
+                        :printFloat(Math.round(eMatrix[i][j])));
                 return Math.round(eMatrix[i][j]);
             });
 
