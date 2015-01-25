@@ -102,6 +102,7 @@ html, body {
 
 .description p {
     padding: 10px;
+    white-space: normal;
     /*background-color: #ffff66;*/
 }
 .title {
