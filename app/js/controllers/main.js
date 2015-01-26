@@ -2,7 +2,7 @@
 
 var controllers = angular.module('blosumCalculatorControllers',['blosumComputer']);
 
-controllers.controller('MainCtrl', ['$scope', function ($scope) {
+controllers.controller('MainCtrl', ['$scope','$location', function ($scope,$location) {
     $scope.inputSequence = '';
     $scope.sequences = [];
     $scope.$parent.sequences = $scope.sequences;
@@ -34,17 +34,21 @@ controllers.controller('MainCtrl', ['$scope', function ($scope) {
         setCalculateButtonDisabled(true);
         showDialog("#dialog-sequence");
     });
-
+    $scope.compute = function($event)
+    {
+        event.preventDefault();
+        $location.path('/stage');
+    };
 }]);
 
 controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMService) {
     $scope.stageId = 1;
     $scope.sequences = $scope.$parent.sequences;
-    console.log($scope.sequences);
     $scope.algoResults = BLOSUMService.getMatrices($scope.sequences);
-    if($scope.algoResults == undefined || $scope.algoResults.error)
+    if($scope.sequences == undefined || $scope.algoResults == undefined || $scope.algoResults.error)
     {
         $location.path('/');
+        return;
     }
     $scope.content = [];
     $scope.currentStep = 0;
