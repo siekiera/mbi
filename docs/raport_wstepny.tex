@@ -1,0 +1,49 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[intlimits]{amsmath}
+%\usepackage{fullpage}
+\title{Metody bioinformatyki - dokumentacja wstępna projektu}
+\author{Michał Toporowski \and Marcin Swend}
+\date{\today}
+
+\newcommand{\plw}[1]{\frac{#1}{2}}
+
+\begin{document}
+\maketitle
+%\setlength{\parindent}{0pt}
+\section{Cel projektu}
+Stworzenie interaktywnej aplikacji pozwalającej na zrozumienie działania algorytmu obliczającego macierz podobieństwa metodą BLOSUM.
+
+\section{Założenia}
+\begin{itemize}
+\item aplikacja osadzona w przeglądarce 
+\item wykorzystanie języka JavaScript i HTML5
+\item \textbf{dane wejściowe:} sekwencje wprowadzane przez użytkownika z klawiatury lub wczytywane z pliku
+\item \textbf{dane wyjściowe:} macierz podobieństwa dla danych sekwencji obliczona metodą BLOSUM oraz pośrednie wyniki obliczeń wyświetlane użytkownikowi poprzez przeglądarkę
+\item możliwość śledzenia przez użytkownika kolejnych kroków algorytmu obliczającego macierz
+\begin{itemize}
+\item opis aktualnie wykonywanego kroku wraz z uzasadnieniem wyniku
+\item wyróżnienie aktualnie obliczanej komórki/kolumny
+\item możliwość przechodzenia do wybranych kroków i etapów algorytmu (bezpośrednie przejście do kolejnego etapu, powrót do poprzedniego kroku/etapu)
+\end{itemize}
+\end{itemize}
+\section{Algorytm}
+Wykorzystany zostanie algorytm składający się z następujących etapów:
+\begin{enumerate}
+\item \textbf{Obliczenie macierzy podstawień}\\
+Obliczenie macierzy $A_{i,j}$ zawierającej częstości występowania symbolu $i$ w danym miejscu na łańcuchu oraz symbolu $j$ w tym samym miejscu w innych łańcuchach.
+\item \textbf{Estymacja prawdopodobieństwa wystąpienia pary}\\
+Obliczenie macierzy zawierającej prawdopodobieństwa wystąpienia pary $q_{i,j}$
+na podstawie wzoru:
+$$q_{i,j} = \frac{A_{i,j}}{\sum_{x, y}A_{x,y}}$$
+\item \textbf{Estymacja prawdopodobieństw symboli}\\
+Obliczenie prawdopodobieństw wystąpienia każdego z symboli $p_i$ na podstawie wzoru:
+$$p_i = q_{i,i} + \sum_{j \neq i}\frac{q_{i,j}}{2}$$
+\item \textbf{Obliczenie macierzy BLOSUM}\\
+Obliczenie macierzy $e_{i,j}$ na podstawie wzoru:
+$$e_{i,j} = 2\log_2\left(\frac{q_{i,j}}{p_i p_j}\right)$$
+Następnie obliczenie macierzy BLOSUM poprzez zaokrąglenie do liczb całkowitych.
+\end{enumerate}
+\end{document}
