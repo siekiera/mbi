@@ -93,6 +93,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
             fillMatrix(substitutionMatrixHint, function (i, j) {
                 return '';
             });
+
             //compute substitutionMatrix
             //TODO: effectiveness - 2x add instead of "add once and then mirror"
             for (var c = 0; c < sequenceLength; ++c) {
@@ -130,8 +131,6 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                 }
             }
 
-            //console.log(substitutionMatrixHint[0][0]);
-
             //compute pairProbabilityMatrix
             var pairProbabilityMatrix = getSquareMatrix(alphabetSize);
             var pairProbabilityMatrixHint = getSquareMatrix(alphabetSize);
@@ -143,8 +142,6 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                     divider,alphabet[i],alphabet[j], substitutionMatrix[i][j], divider, value);
                 return value;
             });
-
-            //console.log(pairProbabilityMatrixHint[0][0]);
 
             //compute symbolProbabilityMatrix
             var symbolProbabilityMatrix = new Array(alphabetSize);
@@ -168,8 +165,6 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                 symbolProbabilityMatrixHint[i] = sprintf(scope.hintSymMatrix,alphabet[i],symbolHintString,symbolProbabilityMatrix[i])
             }
 
-            //console.log(symbolProbabilityMatrixHint[0]);
-
             //compute eMatrix
             var eMatrix = getSquareMatrix(alphabetSize);
             var eMatrixHint = getSquareMatrix(alphabetSize);
@@ -181,8 +176,6 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                     printFloat(value));
                 return value;
             });
-
-            //console.log(eMatrixHint[0][0]);
 
             //compute BLOSUMMatrix
             var BLOSUMMatrix = getSquareMatrix(alphabetSize);
@@ -196,8 +189,6 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
                         :printFloat(Math.round(eMatrix[i][j])));
                 return Math.round(eMatrix[i][j]);
             });
-
-            //console.log(BLOSUMMatrixHint[0][0]);
 
             matrices['substitutionMatrix']= substitutionMatrix;
             matrices['pairProbabilityMatrix']= pairProbabilityMatrix;
