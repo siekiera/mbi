@@ -69,7 +69,7 @@ controllers.controller('StageCtrl', function ($scope,$location,$route, BLOSUMSer
         p_symbol_pair_matrix: {
             matrix: $scope.algoResults.symbolProbabilityMatrix,
             hints: $scope.algoResults.symbolProbabilityMatrixHint,
-            specialRowsNames: ['p(i,j)'],
+            specialRowsNames: ['p(i)'],
             description: 'Macierz prawdopodobieństw symboli p(i,j)'
         },
         e_matrix: {

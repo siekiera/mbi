@@ -3,6 +3,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
     {
         this.getMatrices = function(inData)
         {
+            //helper functions
             var fillMatrix = function(matrix, fun) {
                 for(var i=0;i<matrix.length;++i)
                 {
@@ -53,6 +54,7 @@ var app = angular.module('blosumComputer', ['sprintf']).service('BLOSUMService',
             scope.hintBLOSUMMatrix = 'Wartość elementu (%s,%s) w macierzy BLOSUM to zaokrąglona do liczby ' +
             'całkowitej wartość %s, czyli %s';
 
+            //start computation
             var sequences = inData;
 
             //compute alphabet, sequenceLength, alphabetSize, mapLetterInt

@@ -1,25 +1,23 @@
 # mbi
-Aplikacja webowa do obliczania macierzy BLOSUM.
+Aplikacja webowa do obliczania macierzy BLOSUM (framework AngularJS).
 
-A web application for BLOSUM matrix calculation
-
-### Usage:
-1. Install required components with
+### Użytkownanie (wersja deweloperska - katalog /app)
+0. Zainstaluj npm.
+1. Zainstaluj potrzebne komponenty używając polecenia:
 ```
 npm install
 ```
-2. Start webserver with
+2. Uruchom webserwer poleceniem:
 ```
 npm start
 ```
-3. Run app/index.html
+3. Przejdź do adresu URL app/index.html
 
-### Tests:
+### Użytkownanie (wersja wdrożeniowa katalog /dist)
+Skopiuj zawartość katalogu /dist na serwer.
+
+### Testy:
 Unit tests (karma):
 ```
 npm test
-```
-E2E tests (protractor) (make sure webserver is running):
-```
-npm run protracor
 ```
